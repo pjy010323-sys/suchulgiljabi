@@ -50,7 +50,7 @@
     backdrop-filter: saturate(180%) blur(12px);
     border-bottom: 1px solid var(--line);
   }
-  header .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+  header > .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; }
   .logo { font-weight: 800; font-size: 20px; text-decoration: none; letter-spacing: -0.6px; display: flex; align-items: center; gap: 6px; }
   .logo b { color: var(--mint); font-weight: 800; }
   .head-btn {
@@ -58,6 +58,18 @@
     background: var(--mint); color: #fff;
     padding: 9px 16px; border-radius: 10px;
   }
+
+  .head-right { display: flex; align-items: center; gap: 8px; }
+  .menu-btn { width: 40px; height: 40px; border: 1px solid var(--line); background: #fff; border-radius: 10px; cursor: pointer; display: grid; place-content: center; gap: 4px; padding: 0; }
+  .menu-btn span { display: block; width: 18px; height: 2px; background: var(--ink); border-radius: 2px; transition: transform .2s, opacity .2s; }
+  .menu-btn[aria-expanded="true"] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .menu-btn[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .menu-btn[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+  .menu { background: #fff; border-top: 1px solid var(--line); box-shadow: 0 16px 30px rgba(22, 33, 28, .08); }
+  .menu .wrap { display: flex; flex-direction: column; padding-top: 6px; padding-bottom: 10px; }
+  .menu a { text-decoration: none; font-weight: 700; padding: 15px 2px; border-bottom: 1px solid var(--line); }
+  .menu a:last-child { border-bottom: 0; color: var(--mint-dark); }
+  .menu a:hover { color: var(--mint-dark); }
 
   /* 공통 섹션 */
   section { padding: 72px 0; scroll-margin-top: 60px; }
@@ -243,6 +255,35 @@
     padding: 14px; border-radius: 14px;
   }
 
+
+  /* 채널 (유튜브·블로그) */
+  .ch { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .ch-card { padding: 22px 20px; display: flex; flex-direction: column; }
+  .ch-name { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+  .ch-name .ic { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; font-size: 20px; flex: none; }
+  .ch-yt .ch-name .ic { background: #ffeceb; }
+  .ch-blog .ch-name .ic { background: var(--mint-light); }
+  .ch-name strong { display: block; font-size: 16px; }
+  .ch-name small { color: var(--muted); font-size: 13px; }
+  .shorts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .short { position: relative; aspect-ratio: 9 / 16; border-radius: 14px; overflow: hidden; background: #e9efec; }
+  .short button { all: unset; cursor: pointer; position: absolute; inset: 0; display: block; }
+  .short img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .short .play { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 46px; height: 46px; border-radius: 50%; background: rgba(0,0,0,.55); color: #fff; display: grid; place-items: center; font-size: 18px; }
+  .short .cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 26px 10px 10px; color: #fff; font-size: 13px; font-weight: 700; line-height: 1.35; background: linear-gradient(to top, rgba(0,0,0,.7), transparent); }
+  .short iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .posts { list-style: none; margin: 0; padding: 0; flex: 1; }
+  .posts li + li { border-top: 1px solid var(--line); }
+  .posts a { display: flex; align-items: center; gap: 10px; padding: 13px 2px; text-decoration: none; font-weight: 600; font-size: 15px; line-height: 1.45; }
+  .posts a span { flex: 1; }
+  .posts a::after { content: "→"; color: var(--mint); font-weight: 800; }
+  .ch-btn { display: block; margin-top: 16px; text-align: center; text-decoration: none; font-weight: 700; font-size: 14px; color: var(--ink-2); background: var(--bg-soft); border: 1px solid var(--line); border-radius: 12px; padding: 12px; }
+  @media (max-width: 600px) { .ch { grid-template-columns: 1fr; } }
+
+  .hero-form { scroll-margin-top: 72px; margin: 0 auto; text-align: left; padding: 24px 20px; }
+  .hero-form-title { margin: 0 0 16px; text-align: center; font-weight: 800; color: var(--mint-dark); }
+  .hero .honest { margin-top: 18px; }
+
   /* 푸터 */
   footer { background: var(--bg-soft); border-top: 1px solid var(--line); padding: 36px 0 44px; font-size: 13px; color: var(--muted); }
   footer .logo { color: var(--ink); margin-bottom: 10px; }
@@ -286,8 +327,22 @@
 <header>
   <div class="wrap">
     <a class="logo" href="#top">🧭 <span>수출<b>길잡이</b></span></a>
-    <a class="head-btn" href="#ask">견적 바로 확인</a>
+    <div class="head-right">
+      <a class="head-btn go-form" href="#ask-top">견적 바로 확인</a>
+      <button type="button" class="menu-btn" id="menuBtn" aria-label="메뉴 열기" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
+    </div>
   </div>
+  <nav class="menu" id="menu" hidden>
+    <div class="wrap">
+      <a href="#cmp">국내 vs 수출 비교</a>
+      <a href="#cases">실제 사례</a>
+      <a href="#check">차 넘기기 전 체크리스트</a>
+      <a href="#flow">진행 순서</a>
+      <a href="#channel">유튜브·블로그</a>
+      <a href="#faq">자주 묻는 질문</a>
+      <a href="#ask">무료 문의</a>
+    </div>
+  </nav>
 </header>
 
 <main id="top">
@@ -299,13 +354,16 @@
       <h1>내 차 팔기 전에,<br><em>3분만</em> 확인하세요</h1>
       <p class="desc">연식 좋은 차부터 오래된 차까지,<br>같은 차라도 국내·수출 금액이 꽤 달라요.</p>
       <div class="chips"><span>연식 좋은 차</span><span>10년 넘은 차</span><span>20만km 넘게 탄 차</span><span>고장·사고 난 차</span></div>
-      <a class="btn" href="#ask">내 차 견적 바로 확인하기 →</a>
+      <div class="form-box card hero-form" id="ask-top">
+        <p class="hero-form-title">30초면 끝나요 · 무료</p>
+        <div class="qf-slot" data-pos="top"></div>
+      </div>
       <p class="honest">국내가 나으면 국내가, 폐차가 맞으면 폐차가 맞다고 말씀드려요</p>
     </div>
   </section>
 
   <!-- ② 폐차 vs 수출 -->
-  <section class="soft">
+  <section class="soft" id="cmp">
     <div class="wrap">
       <span class="eyebrow">비교</span>
       <h2>국내 vs 수출, 뭐가 달라요?</h2>
@@ -335,7 +393,7 @@
   </section>
 
   <!-- ③ 이런 차라면 -->
-  <section>
+  <section id="target">
     <div class="wrap">
       <span class="eyebrow">대상 차량</span>
       <h2>이런 차라면 꼭 물어보세요</h2>
@@ -352,7 +410,7 @@
   </section>
 
   <!-- ④ 실제 사례 -->
-  <section class="soft">
+  <section class="soft" id="cases">
     <div class="wrap">
       <span class="eyebrow">실제 사례</span>
       <h2>같은 차, 이만큼 달랐어요</h2>
@@ -404,7 +462,7 @@
   </section>
 
   <!-- ⑤ 체크리스트 -->
-  <section>
+  <section id="check">
     <div class="wrap">
       <span class="eyebrow">체크리스트</span>
       <h2>차 넘기기 전, 이것만은 꼭</h2>
@@ -431,7 +489,7 @@
   </section>
 
   <!-- ⑥ 진행 순서 -->
-  <section class="soft">
+  <section class="soft" id="flow">
     <div class="wrap">
       <span class="eyebrow">진행 순서</span>
       <h2>이렇게 진행돼요</h2>
@@ -446,7 +504,7 @@
   </section>
 
   <!-- ⑦ 운영 -->
-  <section>
+  <section id="about">
     <div class="wrap">
       <span class="eyebrow">운영</span>
       <h2>누가 운영하나요?</h2>
@@ -459,8 +517,36 @@
     </div>
   </section>
 
+  <!-- 채널: 유튜브·블로그 최신 목록 (?feed=guide 로 자동 갱신, 실패하면 아래 적어둔 목록 그대로) -->
+  <section id="channel">
+    <div class="wrap">
+      <span class="eyebrow">수출길잡이 채널</span>
+      <h2>영상과 글로 먼저 보세요</h2>
+      <p class="lead">팔기 전에 알아두면 좋은 이야기를 유튜브와 블로그에 꾸준히 올리고 있어요.</p>
+      <div class="ch">
+        <article class="ch-card card ch-yt">
+          <div class="ch-name"><span class="ic">▶️</span><div><strong>수출길잡이</strong><small>유튜브 쇼츠</small></div></div>
+          <div class="shorts" id="shorts">
+            <div class="short" data-id="ifsB41uMx1E" data-title="봉고3가 사장님께 쓰는 편지"></div>
+            <div class="short" data-id="hemg0LCzAcE" data-title="아빠 몰래 수출 견적 받아봤습니다"></div>
+          </div>
+          <a class="ch-btn" href="https://www.youtube.com/channel/UCwyIMMiKa7OOBbQ6hqvutyw" target="_blank" rel="noopener">유튜브 영상 더 보기</a>
+        </article>
+        <article class="ch-card card ch-blog">
+          <div class="ch-name"><span class="ic">✍️</span><div><strong>수출길잡이</strong><small>네이버 블로그</small></div></div>
+          <ul class="posts" id="posts">
+            <li><a href="https://blog.naver.com/exportstory/224457928924" target="_blank" rel="noopener"><span>중고차 수출업체 고르는 법, 금액보다 먼저 봐야 할 5가지</span></a></li>
+            <li><a href="https://blog.naver.com/exportstory/224455539793" target="_blank" rel="noopener"><span>중고차 매입 사기, 차부터 가져가는 곳 조심하세요</span></a></li>
+            <li><a href="https://blog.naver.com/exportstory/224454278268" target="_blank" rel="noopener"><span>중고차 수출 사기, 최고가 불러놓고 현장에서 깎는 수법</span></a></li>
+          </ul>
+          <a class="ch-btn" href="https://blog.naver.com/exportstory" target="_blank" rel="noopener">블로그 글 더 보기</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <!-- ⑧ 자주 묻는 질문 -->
-  <section class="soft">
+  <section class="soft" id="faq">
     <div class="wrap">
       <span class="eyebrow">FAQ</span>
       <h2>자주 묻는 질문</h2>
@@ -482,27 +568,7 @@
       <h2>내 차, 어디에 파는 게 나을까?</h2>
       <p class="lead">아는 만큼만 적어 주셔도 돼요.</p>
       <div class="form-box card">
-        <form id="qf" novalidate>
-          <div class="grid2">
-            <label class="f">차종<input name="car" placeholder="예: 쏘나타" required></label>
-            <label class="f">연식<input name="year" placeholder="예: 2012년식" required></label>
-            <label class="f">주행거리(km)<input name="km" placeholder="예: 21만km" required></label>
-            <label class="f">지역<input name="region" placeholder="예: 대구" required></label>
-          </div>
-          <label class="f">연락처<input name="phone" type="tel" inputmode="tel" placeholder="010-0000-0000" required></label>
-          <label class="f">하고 싶은 말 <span class="opt">(선택)</span><textarea name="memo" placeholder="고장 난 곳, 사고 이력, 궁금한 점 등"></textarea></label>
-          <p class="photo-note">📷 사진은 연락드릴 때 받을게요.</p>
-          <label class="agree"><input type="checkbox" name="agree" checked required> <span><b>(필수)</b> 개인정보 수집·이용에 동의해요</span></label>
-          <p class="agree-detail">수집 항목: 차량 정보·지역·연락처 / 목적: 견적 안내 / 보관: 상담 후 일정 기간 뒤 삭제</p>
-          <button class="btn" type="submit" id="qfBtn">내 차 견적 바로 확인하기</button>
-          <p class="err" id="qfErr"></p>
-          <p class="free">물어보는 건 돈이 들지 않아요 · 팔지 않아도 괜찮아요</p>
-        </form>
-        <div class="msg" id="qfDone">
-          <div class="big">✓</div>
-          <h3>견적 확인 접수 완료!</h3>
-          <p style="color:var(--muted);margin:0">담당자가 바로 연락드려 내 차 견적을 알려 드려요.<br>차 사진이 있으면 그때 보내 주세요.</p>
-        </div>
+        <div class="qf-slot" data-pos="bottom"></div>
       </div>
       <a class="kakao-alt" href="https://open.kakao.com/o/sPaXRkUi" target="_blank" rel="noopener">💬 카톡으로 바로 물어보기</a>
     </div>
@@ -523,70 +589,173 @@
   </div>
 </footer>
 
-<div class="float" id="float"><a href="#ask">내 차 견적 바로 확인하기</a></div>
+<div class="float" id="float"><a class="go-form" href="#ask-top">내 차 견적 바로 확인하기</a></div>
 
 <script>
   var QF_ENDPOINT = 'https://script.google.com/macros/s/AKfycby5epYR9jjNqNfs3VNpTOxZEfctj7IbCbho5clYqGdl3pIH40FYfNJwmfBLSFdT5pMZ/exec';
+  var BTN_TEXT = '내 차 견적 바로 확인하기';
 
-  var form = document.getElementById('qf');
-  var btn = document.getElementById('qfBtn');
-  var err = document.getElementById('qfErr');
-
-  function showErr(t) { err.textContent = t; err.style.display = 'block'; }
-
-  // 동의 체크를 풀면 문의 버튼을 막음
-  var agree = form.elements.agree;
-  function syncAgree() {
-    btn.disabled = !agree.checked;
-    btn.textContent = agree.checked ? '내 차 견적 바로 확인하기' : '개인정보 동의 후 확인할 수 있어요';
+  // 문의 칸 (위·아래 같은 틀, 위쪽은 '하고 싶은 말' 없이 짧게)
+  function formHtml(pos) {
+    return '<form novalidate>'
+      + '<div class="grid2">'
+      + '<label class="f">차종<input name="car" placeholder="예: 쏘나타" required></label>'
+      + '<label class="f">연식<input name="year" placeholder="예: 2012년식" required></label>'
+      + '<label class="f">주행거리(km)<input name="km" placeholder="예: 21만km" required></label>'
+      + '<label class="f">지역<input name="region" placeholder="예: 대구" required></label>'
+      + '</div>'
+      + '<label class="f">연락처<input name="phone" type="tel" inputmode="tel" placeholder="010-0000-0000" required></label>'
+      + (pos === 'bottom'
+        ? '<label class="f">하고 싶은 말 <span class="opt">(선택)</span><textarea name="memo" placeholder="고장 난 곳, 사고 이력, 궁금한 점 등"></textarea></label>'
+          + '<p class="photo-note">📷 사진은 연락드릴 때 받을게요.</p>'
+        : '')
+      + '<label class="agree"><input type="checkbox" name="agree" checked required> <span><b>(필수)</b> 개인정보 수집·이용에 동의해요</span></label>'
+      + '<p class="agree-detail">수집 항목: 차량 정보·지역·연락처 / 목적: 견적 안내 / 보관: 상담 후 일정 기간 뒤 삭제</p>'
+      + '<button class="btn" type="submit">' + BTN_TEXT + '</button>'
+      + '<p class="err"></p>'
+      + '<p class="free">물어보는 건 돈이 들지 않아요 · 팔지 않아도 괜찮아요</p>'
+      + '</form>'
+      + '<div class="msg"><div class="big">✓</div><h3>견적 확인 접수 완료!</h3>'
+      + '<p style="color:var(--muted);margin:0">담당자가 바로 연락드려 내 차 견적을 알려 드려요.<br>차 사진이 있으면 그때 보내 주세요.</p></div>';
   }
-  agree.addEventListener('change', syncAgree);
-  syncAgree();
 
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    err.style.display = 'none';
+  function setupForm(slot) {
+    var pos = slot.getAttribute('data-pos');
+    slot.innerHTML = formHtml(pos);
+    var form = slot.querySelector('form');
+    var btn = form.querySelector('button');
+    var err = form.querySelector('.err');
     var f = form.elements;
-    var need = [['car', '차종'], ['year', '연식'], ['km', '주행거리'], ['region', '지역'], ['phone', '연락처']];
-    for (var i = 0; i < need.length; i++) {
-      if (!f[need[i][0]].value.trim()) { showErr(need[i][1] + '을(를) 적어 주세요.'); f[need[i][0]].focus(); return; }
+    function showErr(t) { err.textContent = t; err.style.display = 'block'; }
+
+    // 동의 체크를 풀면 문의 버튼을 막음
+    function syncAgree() {
+      btn.disabled = !f.agree.checked;
+      btn.textContent = f.agree.checked ? BTN_TEXT : '개인정보 동의 후 확인할 수 있어요';
     }
-    if (f.phone.value.replace(/\D/g, '').length < 9) { showErr('연락처를 다시 확인해 주세요.'); f.phone.focus(); return; }
-    if (!f.agree.checked) { showErr('개인정보 수집·이용에 동의해 주세요.'); return; }
+    f.agree.addEventListener('change', syncAgree);
+    syncAgree();
 
-    var parts = [f.car.value, f.year.value, f.km.value, f.region.value];
-    if (f.memo.value.trim()) parts.push(f.memo.value);
-    var payload = {
-      brand: '수출길잡이',
-      carInfo: parts.map(function (s) { return s.trim(); }).join(' / '),
-      phone: f.phone.value.trim(),
-      position: 'bottom',
-      page: location.href
-    };
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      err.style.display = 'none';
+      var need = [['car', '차종'], ['year', '연식'], ['km', '주행거리'], ['region', '지역'], ['phone', '연락처']];
+      for (var i = 0; i < need.length; i++) {
+        if (!f[need[i][0]].value.trim()) { showErr(need[i][1] + '을(를) 적어 주세요.'); f[need[i][0]].focus(); return; }
+      }
+      if (f.phone.value.replace(/\D/g, '').length < 9) { showErr('연락처를 다시 확인해 주세요.'); f.phone.focus(); return; }
+      if (!f.agree.checked) { showErr('개인정보 수집·이용에 동의해 주세요.'); return; }
 
-    btn.disabled = true;
-    btn.textContent = '견적 확인 중…';
-    fetch(QF_ENDPOINT, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: JSON.stringify(payload)
-    }).then(function () {
-      form.style.display = 'none';
-      document.getElementById('qfDone').classList.add('show');
-    }).catch(function () {
-      btn.disabled = false;
-      btn.textContent = '내 차 견적 바로 확인하기';
-      showErr('보내지 못했어요. 잠시 뒤 다시 눌러 주시거나 아래 카톡으로 물어봐 주세요.');
+      var parts = [f.car.value, f.year.value, f.km.value, f.region.value];
+      if (f.memo && f.memo.value.trim()) parts.push(f.memo.value);
+      var payload = {
+        brand: '수출길잡이',
+        carInfo: parts.map(function (t) { return t.trim(); }).join(' / '),
+        phone: f.phone.value.trim(),
+        position: pos,
+        page: location.href
+      };
+
+      btn.disabled = true;
+      btn.textContent = '견적 확인 중…';
+      fetch(QF_ENDPOINT, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload)
+      }).then(function () {
+        form.style.display = 'none';
+        slot.querySelector('.msg').classList.add('show');
+      }).catch(function () {
+        btn.disabled = false;
+        btn.textContent = BTN_TEXT;
+        showErr('보내지 못했어요. 잠시 뒤 다시 눌러 주시거나 아래 카톡으로 물어봐 주세요.');
+      });
+    });
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('.qf-slot'), setupForm);
+
+  // "견적 바로 확인" 버튼 → 위쪽 문의 칸으로 가서 차종 칸에 바로 입력
+  Array.prototype.forEach.call(document.querySelectorAll('.go-form'), function (a) {
+    a.addEventListener('click', function (e) {
+      var box = document.getElementById('ask-top');
+      if (!box) return;
+      e.preventDefault();
+      box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      var input = box.querySelector('input[name=car]');
+      if (input) setTimeout(function () { input.focus({ preventScroll: true }); }, 450);
     });
   });
 
-  // 문의 칸이 보이면 아래 고정 버튼 숨기기
+  // 메뉴: 누르면 펼치고, 칸을 고르면 그 자리로 이동하며 닫힘
+  var menuBtn = document.getElementById('menuBtn');
+  var menu = document.getElementById('menu');
+  function setMenu(open) {
+    menu.hidden = !open;
+    menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    menuBtn.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
+  }
+  menuBtn.addEventListener('click', function () { setMenu(menu.hidden); });
+  Array.prototype.forEach.call(menu.querySelectorAll('a'), function (a) {
+    a.addEventListener('click', function (e) {
+      var target = document.querySelector(a.getAttribute('href'));
+      setMenu(false);
+      if (!target) return;
+      e.preventDefault();
+      requestAnimationFrame(function () {
+        var headH = document.querySelector('header').offsetHeight;
+        window.scrollTo({ top: target.getBoundingClientRect().top + window.pageYOffset - headH + 1, behavior: 'smooth' });
+      });
+    });
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
+
+  // 유튜브·블로그 최신 목록 (실패하면 적어둔 목록 그대로)
+  function esc(t) { return String(t || '').replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function cleanTitle(t) { t = String(t || '').replace(/#[^\s#]+/g, '').replace(/\s+/g, ' ').trim(); return t.length > 34 ? t.slice(0, 32) + '…' : t; }
+  function drawShorts() {
+    Array.prototype.forEach.call(document.querySelectorAll('#shorts .short'), function (box) {
+      var id = box.getAttribute('data-id');
+      if (!/^[\w-]{11}$/.test(id || '')) return;
+      var cap = esc(cleanTitle(box.getAttribute('data-title')));
+      box.innerHTML = '<button type="button" aria-label="' + cap + ' 영상 재생"><img alt="" loading="lazy"><span class="play">▶</span><span class="cap">' + cap + '</span></button>';
+      var img = box.querySelector('img');
+      img.onerror = function () { img.onerror = null; img.src = 'https://i.ytimg.com/vi/' + id + '/hqdefault.jpg'; };
+      img.src = 'https://i.ytimg.com/vi/' + id + '/oar2.jpg';
+      box.querySelector('button').addEventListener('click', function () {
+        box.innerHTML = '<iframe src="https://www.youtube.com/embed/' + id + '?autoplay=1&rel=0&playsinline=1" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen title="' + cap + '"></iframe>';
+      });
+    });
+  }
+  drawShorts();
+  fetch(QF_ENDPOINT + '?feed=guide')
+    .then(function (r) { return r.json(); })
+    .then(function (feed) {
+      if (!feed || feed.brand !== 'guide') return;   // 수출길잡이 목록일 때만 바꿈
+      if (feed.shorts && feed.shorts.length) {
+        document.getElementById('shorts').innerHTML = feed.shorts.slice(0, 2).map(function (v) {
+          return '<div class="short" data-id="' + esc(v.id) + '" data-title="' + esc(v.title) + '"></div>';
+        }).join('');
+        drawShorts();
+      }
+      if (feed.posts && feed.posts.length) {
+        document.getElementById('posts').innerHTML = feed.posts.slice(0, 4).map(function (p) {
+          return '<li><a href="' + esc(p.link) + '" target="_blank" rel="noopener"><span>' + esc(p.title) + '</span></a></li>';
+        }).join('');
+      }
+    })
+    .catch(function () {});
+
+  // 문의 칸(위·아래)이 보이면 아래 고정 버튼 숨기기
   var fl = document.getElementById('float');
   if ('IntersectionObserver' in window) {
-    new IntersectionObserver(function (es) {
-      fl.classList.toggle('hide', es[0].isIntersecting);
-    }, { threshold: 0.1 }).observe(document.getElementById('ask'));
+    var seen = {};
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (en) { seen[en.target.id] = en.isIntersecting; });
+      fl.classList.toggle('hide', !!(seen['ask-top'] || seen['ask']));
+    }, { threshold: 0.1 });
+    io.observe(document.getElementById('ask-top'));
+    io.observe(document.getElementById('ask'));
   }
 </script>
 </body>
