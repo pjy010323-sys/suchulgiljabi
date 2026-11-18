@@ -1,7 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://suchul.kr/</loc>
-    <lastmod>2026-10-30</lastmod>
-  </url>
+  <url><loc>https://suchul.kr/</loc><lastmod>2026-11-18</lastmod><priority>1.0</priority></url>
+  <url><loc>https://suchul.kr/guide/</loc><lastmod>2026-11-18</lastmod><priority>0.8</priority></url>
+  <url><loc>https://suchul.kr/guide/lotze-innovation-scrap-vs-export/</loc><lastmod>2026-11-18</lastmod><priority>0.7</priority></url>
+  <url><loc>https://suchul.kr/guide/avante-scrap-price-vs-export/</loc><lastmod>2026-11-18</lastmod><priority>0.7</priority></url>
+  <url><loc>https://suchul.kr/guide/audi-a7-scrap-vs-export/</loc><lastmod>2026-11-17</lastmod><priority>0.7</priority></url>
+  <url><loc>https://suchul.kr/guide/scrap-deregistration-check-after-export/</loc><lastmod>2026-11-17</lastmod><priority>0.7</priority></url>
+  <url><loc>https://suchul.kr/guide/yf-sonata-scrap-vs-export-200k/</loc><lastmod>2026-11-16</lastmod><priority>0.7</priority></url>
+  <url><loc>https://suchul.kr/guide/grandeur-tg-scrap-cost-vs-export/</loc><lastmod>2026-11-16</lastmod><priority>0.7</priority></url>
+  <url><loc>https://suchul.kr/guide/scrap-deregistration-certificate-guide/</loc><lastmod>2026-11-15</lastmod><priority>0.7</priority></url>
+  <url><loc>https://suchul.kr/guide/scrap-deregistration-cost-vs-export/</loc><lastmod>2026-11-14</lastmod><priority>0.7</priority></url>
+  <url><loc>https://suchul.kr/guide/avante-hd-scrap-vs-export/</loc><lastmod>2026-11-13</lastmod><priority>0.7</priority></url>
+  <url><loc>https://suchul.kr/guide/parents-car-disposal-documents-export/</loc><lastmod>2026-11-13</lastmod><priority>0.7</priority></url>
+  <url><loc>https://suchul.kr/guide/used-car-disposal-checklist-order/</loc><lastmod>2026-11-10</lastmod><priority>0.7</priority></url>
+  <url><loc>https://suchul.kr/guide/parents-car-disposal-before-scrap/</loc><lastmod>2026-11-09</lastmod><priority>0.7</priority></url>
+  <url><loc>https://suchul.kr/guide/old-car-check-before-selling-export/</loc><lastmod>2026-11-08</lastmod><priority>0.7</priority></url>
+  <url><loc>https://suchul.kr/guide/high-mileage-car-export-guide/</loc><lastmod>2026-11-06</lastmod><priority>0.7</priority></url>
+  <url><loc>https://suchul.kr/guide/used-car-export-quote-difference/</loc><lastmod>2026-11-03</lastmod><priority>0.7</priority></url>
+  <url><loc>https://suchul.kr/guide/used-car-disposal-three-options/</loc><lastmod>2026-11-02</lastmod><priority>0.7</priority></url>
+  <url><loc>https://suchul.kr/guide/scrap-cost-calculation-vs-export/</loc><lastmod>2026-11-01</lastmod><priority>0.7</priority></url>
+  <url><loc>https://suchul.kr/guide/scrap-deregistration-not-done-fines/</loc><lastmod>2026-10-31</lastmod><priority>0.7</priority></url>
+  <url><loc>https://suchul.kr/guide/how-to-choose-car-export-company/</loc><lastmod>2026-10-29</lastmod><priority>0.7</priority></url>
+  <url><loc>https://suchul.kr/guide/used-car-buyer-fraud-check/</loc><lastmod>2026-10-27</lastmod><priority>0.7</priority></url>
+  <url><loc>https://suchul.kr/guide/used-car-export-scam-price-cut/</loc><lastmod>2026-10-26</lastmod><priority>0.7</priority></url>
 </urlset>
